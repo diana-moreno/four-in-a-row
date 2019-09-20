@@ -4,15 +4,7 @@ import Board from './components/Board/Board'
 
 class App extends Component {
   state = {
-      boardGame:
-  [[null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null],
-  [null, null, null, 'rojo', null, 'azul', null]],
-
-  //Array(6).fill().map(()=>Array(7).fill(null))
+    boardGame: Array(6).fill().map(()=>Array(7).fill(null)),
     tab: 'red',
     player: 'player1'
   }
@@ -36,8 +28,21 @@ class App extends Component {
     let lastEmptyPosition = allEmptyPositions
                               .filter(elem => elem.y === column)
                               .sort((a, b) => b.x - a.x)[0]
-    console.log(column, lastEmptyPosition)
-    return lastEmptyPosition;
+    //console.log(column, lastEmptyPosition)
+    this.putATab(lastEmptyPosition)
+  }
+  putATab(coord) {
+    let x = coord.x;
+    let y = coord.y
+    let boardGame = [...this.state.boardGame];
+    boardGame[x][y] = this.state.tab;
+
+    this.setState({
+      ...this.state,
+      boardGame,
+      tab: this.state.tab === 'red' ? 'black' : 'red',
+      player: this.state.player === 'player1' ? 'player2' : 'player1'
+    })
   }
   render() {
     return (
