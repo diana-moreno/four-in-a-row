@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Board.css';
+import Tab from '..//Tab/Tab';
 
 class Board extends Component {
   state = {}
@@ -10,9 +11,14 @@ class Board extends Component {
 // se renderiza el tablero completo indicando unas clases que están vinculadas a una posición y un estilo en CSS.
   render() {
     return(
-      <div onClick={this.userPlays} className={'box box-position-' + this.props.X + '-' + this.props.Y + ' ' + 'column-' + this.props.Y}>
-        {/*        {this.props.X}{this.props.Y}*/}
-        {this.props.tab}
+      <div>
+        <Tab
+          X = {this.props.X}
+          Y = {this.props.Y}
+          color = {this.props.color}
+        />
+        <div onClick={this.userPlays} className={'box box-position-' + this.props.X + '-' + this.props.Y + ' ' + 'column-' + this.props.Y}>
+        </div>
       </div>
     )
   }

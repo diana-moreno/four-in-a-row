@@ -5,7 +5,7 @@ import Board from './components/Board/Board'
 class App extends Component {
   state = {
     boardGame: Array(6).fill().map(()=>Array(7).fill(null)),
-    tab: 'red',
+    color: 'red',
     player: 'player1'
   }
 
@@ -35,12 +35,12 @@ class App extends Component {
     let x = coord.x;
     let y = coord.y
     let boardGame = [...this.state.boardGame];
-    boardGame[x][y] = this.state.tab;
+    boardGame[x][y] = this.state.color;
 
     this.setState({
       ...this.state,
       boardGame,
-      tab: this.state.tab === 'red' ? 'black' : 'red',
+      color: this.state.color === 'red' ? 'black' : 'red',
       player: this.state.player === 'player1' ? 'player2' : 'player1'
     })
   }
@@ -53,7 +53,7 @@ class App extends Component {
               <Board
                 X = {rowIndex}
                 Y = {cellIndex}
-                tab = {cell}
+                color = {cell}
                 getLastEmptyPosition = {this.getLastEmptyPosition}
               />
             ))
