@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
 import Board from './components/Board/Board';
-/*import Tab from './components/Tab/Tab';*/
 
 class App extends Component {
   state = {
@@ -24,23 +23,26 @@ class App extends Component {
     return emptyPositions;
   }
 
-  // encuentra la última posición vacía en la matriz según la columna que es pasada como parámetro
-  getLastEmptyPosition= (column) => {
+  // encuentra la última posición vacía en la matriz según la columna elegida por el usuario que es pasada como parámetro
+  getLastEmptyPosition(column) {
+    let allEmptyPositions = this.getAllEmptyPositions();
+    let lastEmptyPosition = allEmptyPositions
+                              .filter(elem => elem.y === column)
+                              .sort((a, b) => b.x - a.x)[0]
+    return lastEmptyPosition;
+  }
+
+  // comprueba si ya hay un ganador, si no lo hay, encuentra un lugar libre para colocar la ficha, la coloca y comprueba si se ha ganado.
+  playGame = (column) => {
     if(!this.state.isWon) {
-      let allEmptyPositions = this.getAllEmptyPositions();
-      let lastEmptyPosition = allEmptyPositions
-                                .filter(elem => elem.y === column)
-                                .sort((a, b) => b.x - a.x)[0]
-      //console.log(column, lastEmptyPosition)
-      this.putATab(lastEmptyPosition)
-      let color = this.state.color
-      let horizontalMatrix = [...this.state.boardGame]
-      let verticalMatrix = this.transposeMatrix()
-      this.checkIfWinHorizontalVertical(color, horizontalMatrix)
-      this.checkIfWinHorizontalVertical(color, verticalMatrix)
+      let lastEmptyPosition = this.getLastEmptyPosition(column)
+      this.putAPiece(lastEmptyPosition)
+      this.checkIfWinner()
     }
   }
-  putATab(coord) {
+
+  // coloca una ficha en el tablero según las coordenadas pasadas como parámetro
+  putAPiece(coord) {
     let x = coord.x;
     let y = coord.y
     let boardGame = [...this.state.boardGame];
@@ -54,46 +56,26 @@ class App extends Component {
     })
   }
 
- transposeMatrix() {
-    let boardGame = [...this.state.boardGame]
-
-    let transposedMatrix = boardGame[0].map((col, i) =>
-                           boardGame.map(row => row[i]));
-    return transposedMatrix;
+  // comprueba si algún jugador ha ganado, ya sea haciendo linea horizontal, vertical o en cualquier diagonal.
+  checkIfWinner() {
+    let color = this.state.color
+    let horizontalMatrix = [...this.state.boardGame]
+    let verticalMatrix = this.transposeMatrix(horizontalMatrix)
+    this.checkIfWinHorizontal(color, horizontalMatrix)
+    this.checkIfWinHorizontal(color, verticalMatrix)
+    this.checkIfWinDiagonalLeft(color, horizontalMatrix)
+    this.checkIfWinDiagonalRight(color, horizontalMatrix)
   }
 
-//funciona pero está mal escrito:
-/*  checkIfWin(color, matrix) {
-  for(let i = 0; i < matrix.length; i++) {
-    if(
-        (matrix[i][0] === color
-      && matrix[i][0] === matrix[i][1]
-      && matrix[i][1] === matrix[i][2]
-      && matrix[i][2] === matrix[i][3])
-      || (matrix[i][1] === color
-      && matrix[i][1] === matrix[i][2]
-      && matrix[i][2] === matrix[i][3]
-      && matrix[i][3] === matrix[i][4])
-      || (matrix[i][2] === color
-      && matrix[i][2] === matrix[i][3]
-      && matrix[i][3] === matrix[i][4]
-      && matrix[i][4] === matrix[i][5])
-      || (matrix[i][3] === color
-      && matrix[i][3] === matrix[i][4]
-      && matrix[i][4] === matrix[i][5]
-      && matrix[i][5] === matrix[i][6])
-    ) {
-      console.log('linea', color)
-      this.setState({
-        ...this.state,
-        isWon: true
-      })
-      }
-    }
+  // transpone la matriz, girándola para convertir las filas en columnas y poder comprobar si hay linea en horizontal y aprovechar la función checkIfWinHorizontal
+  transposeMatrix(horizontalMatrix) {
+    let verticalMatrix = horizontalMatrix[0].map((col, i) =>
+                           horizontalMatrix.map(row => row[i]));
+    return verticalMatrix;
   }
-*/
 
-  checkIfWinHorizontalVertical(color, matrix) {
+  // comprobar si hay linea en horizontal
+  checkIfWinHorizontal(color, matrix) {
     for(let i = 0; i < matrix.length; i++) {
       for(let j = 0; j < matrix[i].length; j++) {
         if(matrix[i][j] === matrix[i][j+1]
@@ -109,10 +91,44 @@ class App extends Component {
       }
     }
   }
-  checkIfWinDiagonal(color, matrix) {
 
+  // comprobar si hay linea en la diagonal de izquierda a derecha
+  checkIfWinDiagonalLeft(color, matrix) {
+    for(let i = 3; i < matrix.length; i++) {
+      for(let j = 0; j < matrix[i].length; j++) {
+        if(matrix[i][j] === matrix[i-1][j+1]
+          && matrix[i][j] === matrix[i-2][j+2]
+          && matrix[i][j] === matrix[i-3][j+3]
+          && matrix[i][j] === color) {
+          console.log('win', this.state.player, this.state.color)
+          this.setState({
+            ...this.state,
+            isWon: true
+          })
+        }
+      }
+    }
   }
 
+  // comprobar si hay linea en la diagonal de derecha a izquierda
+  checkIfWinDiagonalRight(color, matrix) {
+    for(let i = 5; i > 3; i--) {
+      for(let j = 6; j > 3; j--) {
+        if(matrix[i][j] === matrix[i-1][j-1]
+         && matrix[i][j] === matrix[i-2][j-2]
+          && matrix[i][j] === matrix[i-3][j-3]
+          && matrix[i][j] === color) {
+          console.log('win', this.state.player, this.state.color)
+          this.setState({
+            ...this.state,
+            isWon: true
+          })
+        }
+      }
+    }
+  }
+
+  // renderizar la aplicación
   render() {
     return (
       <Fragment>
@@ -123,7 +139,8 @@ class App extends Component {
                 X = {rowIndex}
                 Y = {cellIndex}
                 color = {cell}
-                getLastEmptyPosition = {this.getLastEmptyPosition}
+                //getLastEmptyPosition = {this.getLastEmptyPosition}
+                playGame = {this.playGame}
               />
             ))
           ))}
