@@ -11,14 +11,13 @@ class Board extends Component {
   // se renderiza el tablero completo indicando unas clases que están vinculadas a una posición y un estilo en CSS.
   render() {
     return(
-
       <Fragment>
         <Piece
           X = {this.props.X}
           Y = {this.props.Y}
           color = {this.props.color}
         />
-        <div onClick={this.userChoosesColumn} className={'box box-position-' + this.props.X + '-' + this.props.Y + ' ' + 'column-' + this.props.Y}>
+        <div onClick={this.userChoosesColumn}  className={`box box-position-${this.props.X}-${this.props.Y} column-${this.props.Y}`}>
         </div>
      </Fragment>
     )
