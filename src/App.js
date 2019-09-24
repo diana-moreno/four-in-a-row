@@ -153,7 +153,7 @@ class App extends Component {
           </div>
           <div className='right-container'>
           {!this.state.isWon ?
-            <div>
+            <div class='text-turn-container'>
               <h2>{this.state.player}, is your turn.</h2>
               <div className='turn-container'>
                 <h2 className={this.state.player === 'Player 1' ? 'red' : 'red inactive'}>Player 1</h2>

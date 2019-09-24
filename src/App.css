@@ -1,11 +1,21 @@
 html {
   font-size: calc(5px + 4 * ((100vw - 480px) / 801));
 }
-
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 html, body {
   width: 100%;
+  height: 100%;
   margin: 0;
   background: #fcfcfc;
+}
+h1 {
+  margin: 0;
+  padding: 3rem;
+  font-size: 7rem;
 }
 h2 {
   display: flex;
@@ -13,6 +23,10 @@ h2 {
   align-items: center;
   text-align: center;
   font-size: 2.5rem;
+  color: #706e6e;
+}
+.text-turn-container > h2 {
+  font-size: 4rem;
 }
 header {
   font-size: 2.5rem;
@@ -34,6 +48,9 @@ main {
   justify-content: center;
   display: flex;
 }
+.right-container {
+  margin: 4rem;
+}
 .boardGame-container {
   height: 60rem;
   width: 70rem;
@@ -50,27 +67,38 @@ main {
 
 
 /* smartphones, Android phones, landscape iPhone */
-@media screen and (min-device-width:480px) {
-}
-
+@media screen and (min-device-width:480px) {}
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
 @media (min-width:600px) {}
-
-@media screen and (min-width:640px) {
-}
+@media screen and (min-width:640px) {}
 /* tablet, landscape iPad, lo-res laptops ands desktops */
 @media (min-width:801px) {}
 
 /* big landscape tablets, laptops, and desktops */
 @media (min-width:1025px) {
+  body {
+    display: block;
+  }
   main {
     flex-direction: row;
   }
+  h1 {
+    font-size: 6rem;
+  }
+  h2 {
+    font-size: 2.5rem;
+  }
   .left-container {
-    width: 65%;
+    width: 70%;
   }
   .right-container {
-    width: 35%;
+    width: 30%;
+  }
+  .right-container {
+    margin: 0;
+  }
+  .text-turn-container > h2 {
+    font-size: 2.5rem;
   }
 }
 
