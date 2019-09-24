@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import '../../App.css';
-import Board from '../../components/Board/Board';
+import Board from '../Board/Board';
+import { Link } from 'react-router-dom';
+
 
 class SinglePlayer extends Component {
   state = {
@@ -52,18 +54,8 @@ class SinglePlayer extends Component {
       ...this.state,
       boardGame,
       color: this.state.color === 'red' ? 'blue' : 'red',
-      player: this.state.player === 'Player Pc' ? 'Player 2' : 'Player Pc'
+      player: this.state.player === 'Player 1' ? 'Player 2' : 'Player 1'
     })
-  }
-// solo ha cambiado esta función y el nombre del player 1 por player pc
-  playPc = () => {
-    setTimeout(() => {
-      if(this.state.player === 'Player Pc') {
-        let randomColumn = Math.floor(Math.random() * 7)
-        let pcPosition = this.getLastEmptyPosition(randomColumn)
-        this.putAPiece(pcPosition);
-        this.checkIfWinner()
-      }}, 1000)
   }
 
   // comprueba si algún jugador ha ganado, ya sea haciendo linea horizontal, vertical o en cualquier diagonal.
@@ -137,8 +129,29 @@ class SinglePlayer extends Component {
       }
     }
   }
+  // reinicia el state
+  restart =() => {
+    this.setState({
+      boardGame: Array(6).fill().map(()=>Array(7).fill(null)),
+      color: 'blue',
+      player: 'Player 2',
+      isWon: false
+    })
+  }
 
+  //Éstas dos funciones son las únicas diferentes respecto a Twoplayers.js:
+  // solo ha cambiado esta función
+  playPc = () => {
+    setTimeout(() => {
+      if(this.state.player === 'Player 1') {
+        let randomColumn = Math.floor(Math.random() * 7)
+        let pcPosition = this.getLastEmptyPosition(randomColumn)
+        this.putAPiece(pcPosition);
+        this.checkIfWinner()
+      }}, 1000)
+  }
 
+  // cuando se actualiza el estado, ejecutamos la función que permite al PC colocar su ficha
   componentDidUpdate(prevProps, prevState) {
     if (prevState !== this.state) {
       this.playPc()
@@ -165,12 +178,14 @@ class SinglePlayer extends Component {
             </div>
           </div>
           <div className='right-container'>
-          {!this.state.isWon ?
+
+          {!this.state.isWon
+            ?
             <div className='text-turn-container'>
-              <h2>{this.state.player}, is your turn.</h2>
+              <h2>{this.state.player}, is your turn. CAmbiar!</h2>
               <div className='turn-container'>
-                <h2 className={this.state.player === 'Player Pc' ? 'red' : 'red inactive'}>Player Pc</h2>
-                <h2 className={this.state.player === 'Player 2' ? 'blue' : 'blue inactive'}>Player 2</h2>
+                <h2 className={this.state.player === 'Player 1' ? 'blue' : 'blue inactive'}>PC</h2>
+                <h2 className={this.state.player === 'Player 2' ? 'red' : 'red inactive'}>Player 2</h2>
               </div>
             </div>
             :
@@ -178,6 +193,17 @@ class SinglePlayer extends Component {
               <h2>{this.state.isWon ? this.state.player + ' wins!' : null}</h2>
             </div>
           }
+
+            <div>
+              <button onClick={this.restart} className='restart-button'>
+                  Restart
+              </button>
+                <Link to='/'>
+                  <button className='end-game-button'>
+                    End game
+                  </button>
+                </Link>
+            </div>
           </div>
         </main>
       </Fragment>

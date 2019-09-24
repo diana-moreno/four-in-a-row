@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Rules.css';
+import { Link } from 'react-router-dom';
 
 class Rules extends Component {
   state = {}
@@ -14,8 +15,12 @@ class Rules extends Component {
         <h2>PLAYERS</h2>
         <p>You can play against a friend in the same Pc or you can select one player to try your luck against the computer, up to you!</p>
         <div>
-          <p>1 player</p>
-          <p>2 players</p>
+          <Link to='/singlePlayer'>
+            <p>1 player</p>
+          </Link>
+          <Link to='/twoplayers'>
+            <p>2 players</p>
+          </Link>
         </div>
      </div>
     )

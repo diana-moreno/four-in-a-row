@@ -1,13 +1,16 @@
 import React, { Component, Fragment } from 'react';
-import './App.css';
-import Board from './components/Board/Board';
+import '../../App.css';
+import Board from '../Board/Board';
+import { Link } from 'react-router-dom';
+
 
 class TwoPlayers extends Component {
   state = {
     boardGame: Array(6).fill().map(()=>Array(7).fill(null)),
     color: 'red',
-    player: 'Player 1',
-    isWon: false
+    player: 'Player 2',
+    isWon: false,
+    mode: 'twoPlayers'
   }
 
   // encuentra todas las posiciones vacías en la matriz
@@ -128,11 +131,20 @@ class TwoPlayers extends Component {
     }
   }
 
+  // reinicia el state
+  restart = () => {
+    this.setState({
+      boardGame: Array(6).fill().map(()=>Array(7).fill(null)),
+      color: 'blue',
+      player: 'Player 2',
+      isWon: false
+    })
+  }
+
   // renderizar la aplicación
   render() {
     return (
       <Fragment>
-
         <main>
           <div className='left-container'>
             <div className="boardGame-container">
@@ -151,11 +163,11 @@ class TwoPlayers extends Component {
           </div>
           <div className='right-container'>
           {!this.state.isWon ?
-            <div class='text-turn-container'>
+            <div className='text-turn-container'>
               <h2>{this.state.player}, is your turn.</h2>
               <div className='turn-container'>
-                <h2 className={this.state.player === 'Player 1' ? 'red' : 'red inactive'}>Player 1</h2>
-                <h2 className={this.state.player === 'Player 2' ? 'blue' : 'blue inactive'}>Player 2</h2>
+                <h2 className={this.state.player === 'Player 1' ? 'blue' : 'blue inactive'}>Player 1</h2>
+                <h2 className={this.state.player === 'Player 2' ? 'red' : 'red inactive'}>Player 2</h2>
               </div>
             </div>
             :
@@ -163,6 +175,16 @@ class TwoPlayers extends Component {
               <h2>{this.state.isWon ? this.state.player + ' wins!' : null}</h2>
             </div>
           }
+            <div>
+              <button onClick={this.restart} className='restart-button'>
+                  Restart
+              </button>
+                <Link to='/'>
+                  <button className='end-game-button'>
+                    End game
+                  </button>
+                </Link>
+            </div>
           </div>
         </main>
       </Fragment>

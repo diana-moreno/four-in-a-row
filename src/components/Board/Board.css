@@ -65,8 +65,7 @@
   font-weight: bold;
   position: absolute;
   border-radius: 50%;
-  background: white;
-  background: white;
+  background: #fafafa;
   border: 4px solid grey;
 }
 .red {
