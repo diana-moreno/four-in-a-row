@@ -22,7 +22,12 @@ class TwoPlayers extends Component {
           emptyPositions.push({x: indexRow, y: indexElem})
       })
     })
-    //console.log(emptyPositions)
+    if(emptyPositions.length === 1 && !this.state.isWon) {
+      this.setState({
+        ...this.state,
+        isWon: 'draw'
+      })
+    }
     return emptyPositions;
   }
 
@@ -85,7 +90,6 @@ class TwoPlayers extends Component {
           && matrix[i][j] === matrix[i][j+2]
           && matrix[i][j] === matrix[i][j+3]
           && matrix[i][j] === color) {
-          console.log('win', this.state.player, this.state.color)
           this.setState({
             ...this.state,
             isWon: true
@@ -103,7 +107,6 @@ class TwoPlayers extends Component {
           && matrix[i][j] === matrix[i-2][j+2]
           && matrix[i][j] === matrix[i-3][j+3]
           && matrix[i][j] === color) {
-          console.log('win', this.state.player, this.state.color)
           this.setState({
             ...this.state,
             isWon: true
@@ -121,7 +124,6 @@ class TwoPlayers extends Component {
          && matrix[i][j] === matrix[i-2][j-2]
           && matrix[i][j] === matrix[i-3][j-3]
           && matrix[i][j] === color) {
-          console.log('win', this.state.player, this.state.color)
           this.setState({
             ...this.state,
             isWon: true
@@ -135,7 +137,7 @@ class TwoPlayers extends Component {
   restart = () => {
     this.setState({
       boardGame: Array(6).fill().map(()=>Array(7).fill(null)),
-      color: 'blue',
+      color: 'red',
       player: 'Player 2',
       isWon: false
     })
@@ -172,7 +174,7 @@ class TwoPlayers extends Component {
             </div>
             :
             <div className='winner-container'>
-              <h2>{this.state.isWon ? this.state.player + ' wins!' : null}</h2>
+              <h2>{this.state.isWon === true ? this.state.player + ' wins!' : 'This is a draw!'}</h2>
             </div>
           }
             <div>

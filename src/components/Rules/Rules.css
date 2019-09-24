@@ -1,3 +1,26 @@
 .instructions-container {
   text-align: center;
 }
+p {
+  font-size: 1.8rem;
+}
+.players-icons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.players-icons-container > a {
+  margin: 2rem;
+  color: grey;
+  font-size: 3rem;
+}
+.players-icons-container > a:hover {
+  margin: 1.5rem;
+  font-size: 3.5rem;
+}
+.instructions-container > h2 {
+  color: rgb(202, 75, 65);
+}
+.fas {
+  color: #6f91a1
+}

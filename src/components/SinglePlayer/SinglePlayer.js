@@ -21,7 +21,12 @@ class SinglePlayer extends Component {
           emptyPositions.push({x: indexRow, y: indexElem})
       })
     })
-    //console.log(emptyPositions)
+    if(emptyPositions.length === 1 && !this.state.isWon) {
+      this.setState({
+        ...this.state,
+        isWon: 'draw'
+      })
+    }
     return emptyPositions;
   }
 
@@ -84,7 +89,6 @@ class SinglePlayer extends Component {
           && matrix[i][j] === matrix[i][j+2]
           && matrix[i][j] === matrix[i][j+3]
           && matrix[i][j] === color) {
-          console.log('win', this.state.player, this.state.color)
           this.setState({
             ...this.state,
             isWon: true
@@ -102,7 +106,6 @@ class SinglePlayer extends Component {
           && matrix[i][j] === matrix[i-2][j+2]
           && matrix[i][j] === matrix[i-3][j+3]
           && matrix[i][j] === color) {
-          console.log('win', this.state.player, this.state.color)
           this.setState({
             ...this.state,
             isWon: true
@@ -120,7 +123,6 @@ class SinglePlayer extends Component {
          && matrix[i][j] === matrix[i-2][j-2]
           && matrix[i][j] === matrix[i-3][j-3]
           && matrix[i][j] === color) {
-          console.log('win', this.state.player, this.state.color)
           this.setState({
             ...this.state,
             isWon: true
@@ -133,7 +135,7 @@ class SinglePlayer extends Component {
   restart =() => {
     this.setState({
       boardGame: Array(6).fill().map(()=>Array(7).fill(null)),
-      color: 'blue',
+      color: 'red',
       player: 'Player 2',
       isWon: false
     })
@@ -144,11 +146,17 @@ class SinglePlayer extends Component {
   playPc = () => {
     setTimeout(() => {
       if(this.state.player === 'Player 1') {
-        let randomColumn = Math.floor(Math.random() * 7)
+        let availableColumns = this.getAllEmptyPositions()
+          .map(elem => elem.y)
+          .filter(function(item, index, array) {
+            return array.indexOf(item) === index;
+          })
+        let randomIndex = Math.floor(Math.random() * (availableColumns.length))
+        let randomColumn = availableColumns[randomIndex]
         let pcPosition = this.getLastEmptyPosition(randomColumn)
         this.putAPiece(pcPosition);
         this.checkIfWinner()
-      }}, 1000)
+      }}, 500)
   }
 
   // cuando se actualiza el estado, ejecutamos la función que permite al PC colocar su ficha
@@ -182,7 +190,7 @@ class SinglePlayer extends Component {
           {!this.state.isWon
             ?
             <div className='text-turn-container'>
-              <h2>{this.state.player}, is your turn. CAmbiar!</h2>
+              <h2>{this.state.player === 'Player 2' ? 'Player 2' : 'Player PC'}, is your turn.</h2>
               <div className='turn-container'>
                 <h2 className={this.state.player === 'Player 1' ? 'blue' : 'blue inactive'}>PC</h2>
                 <h2 className={this.state.player === 'Player 2' ? 'red' : 'red inactive'}>Player 2</h2>
@@ -190,7 +198,7 @@ class SinglePlayer extends Component {
             </div>
             :
             <div className='winner-container'>
-              <h2>{this.state.isWon ? this.state.player + ' wins!' : null}</h2>
+              <h2>{this.state.isWon === true ? this.state.player + ' wins!' : 'This is a draw!'}</h2>
             </div>
           }
 
