@@ -1,26 +1,82 @@
+html {
+  font-size: calc(5px + 4 * ((100vw - 480px) / 801));
+}
+
 html, body {
-  height: 100%;
   width: 100%;
   margin: 0;
+  background: #fcfcfc;
 }
 h2 {
-  height: 120px;
-  width: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin-left: 9rem;
   font-size: 2.5rem;
-  color: white;
 }
-#root {
+header {
+  font-size: 2.5rem;
+  letter-spacing: 0.6rem;
+  text-align: center;
+  color: rgb(202, 75, 65);
+}
+main {
   height: 100%;
+  width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+.left-container, .right-container {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+}
 .boardGame-container {
-  height: 725px;
-  width: 845px;
+  height: 60rem;
+  width: 70rem;
+  background: rgba(69, 71, 100, 0.5);
+  border: 4px solid grey;
+}
+.turn-container {
+  display: flex;
+  justify-content: space-between;
+}
+.winner-container > h2 {
+  color: black;
+}
+
+
+/* smartphones, Android phones, landscape iPhone */
+@media screen and (min-device-width:480px) {
+}
+
+/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+@media (min-width:600px) {}
+
+@media screen and (min-width:640px) {
+}
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+@media (min-width:801px) {}
+
+/* big landscape tablets, laptops, and desktops */
+@media (min-width:1025px) {
+  main {
+    flex-direction: row;
+  }
+  .left-container {
+    width: 65%;
+  }
+  .right-container {
+    width: 35%;
+  }
+}
+
+/* hi-res laptops and desktops */
+@media screen and (min-width:1281px) {
+  html {
+    font-size: 12px;
+  }
 }

@@ -6,7 +6,7 @@ class App extends Component {
   state = {
     boardGame: Array(6).fill().map(()=>Array(7).fill(null)),
     color: 'red',
-    player: 'player1',
+    player: 'Player 1',
     isWon: false
   }
 
@@ -51,8 +51,8 @@ class App extends Component {
     this.setState({
       ...this.state,
       boardGame,
-      color: this.state.color === 'red' ? 'black' : 'red',
-      player: this.state.player === 'player1' ? 'player2' : 'player1'
+      color: this.state.color === 'red' ? 'blue' : 'red',
+      player: this.state.player === 'Player 1' ? 'Player 2' : 'Player 1'
     })
   }
 
@@ -132,22 +132,42 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <div className="boardGame-container">
-          {this.state.boardGame.map((row, rowIndex) => (
-            row.map((cell, cellIndex) => (
-              <Board
-                X = {rowIndex}
-                Y = {cellIndex}
-                color = {cell}
-                //getLastEmptyPosition = {this.getLastEmptyPosition}
-                playGame = {this.playGame}
-              />
-            ))
-          ))}
-        </div>
-        <div>
-          <h2 className={this.state.color}> {this.state.player}</h2>
-        </div>
+        <header>
+          <h1>Four in a row</h1>
+        </header>
+        <main>
+          <div className='left-container'>
+            <div className="boardGame-container">
+              {this.state.boardGame.map((row, rowIndex) => (
+                row.map((cell, cellIndex) => (
+                  <Board
+                    X = {rowIndex}
+                    Y = {cellIndex}
+                    color = {cell}
+                    //getLastEmptyPosition = {this.getLastEmptyPosition}
+                    playGame = {this.playGame}
+                  />
+                ))
+              ))}
+            </div>
+          </div>
+          <div className='right-container'>
+          {!this.state.isWon ?
+            <div>
+              <h2>{this.state.player}, is your turn.</h2>
+              <div className='turn-container'>
+                <h2 className={this.state.player === 'Player 1' ? 'red' : 'red inactive'}>Player 1</h2>
+                <h2 className={this.state.player === 'Player 2' ? 'blue' : 'blue inactive'}>Player 2</h2>
+              </div>
+            </div>
+            :
+            <div className='winner-container'>
+              <h2>{this.state.isWon ? this.state.player + ' wins!' : null}</h2>
+            </div>
+          }
+
+          </div>
+        </main>
       </Fragment>
     );
   }
