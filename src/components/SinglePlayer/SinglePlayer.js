@@ -136,6 +136,7 @@ class SinglePlayer extends Component {
       }
     }
   }
+
   // reinicia el state
   restart =() => {
     this.setState({
@@ -146,42 +147,139 @@ class SinglePlayer extends Component {
     })
   }
 
+// INTELIGENCIA ARTIFICIAL para elegir las jugadas del ordenador:
 
-  // comprobar si hay linea en horizontal
+  // comprobar si el usuario va a ganar haciendo linea horizontal
   checkHorizontalIA(color, matrix) {
     for(let i = 0; i < matrix.length; i++) {
       for(let j = 0; j < matrix[i].length; j++) {
         if(matrix[i][j] === matrix[i][j+1]
           && matrix[i][j] === matrix[i][j+2]
           && matrix[i][j] === color) {
-          let horinzontalPosition = {x: i, y: j+3}
 
-        let availableColumns = this.getLastEmptyPosition(j+3)
-        console.log(availableColumns.x === horinzontalPosition.x && availableColumns.y === horinzontalPosition.y)
-        console.log(availableColumns)
-        console.log(horinzontalPosition)
-          console.log('a punto de ganar')
+          let nextHorizontalRightPosition = {x: i, y: j+3}
+          let nextHorizontalLeftPosition = {x: i, y: j-1}
+
+          let rightPositionAvailable = this.getLastEmptyPosition(j+3)
+          let leftPositionAvailable = this.getLastEmptyPosition(j-1)
+
+          if(rightPositionAvailable && rightPositionAvailable.x === nextHorizontalRightPosition.x && rightPositionAvailable.y === nextHorizontalRightPosition.y) {
+              return rightPositionAvailable;
+          } else if(leftPositionAvailable && leftPositionAvailable.x === nextHorizontalLeftPosition.x && leftPositionAvailable.y === nextHorizontalLeftPosition.y) {
+              return leftPositionAvailable;
+          }
         }
       }
     }
   }
 
-  //Éstas dos funciones son las únicas diferentes respecto a Twoplayers.js:
-  // solo ha cambiado esta función
+  // comprobar si el usuario va a ganar haciendo linea vertical
+  checkVerticalIA(color, matrix) {
+    for(let i = 2; i < matrix.length; i++) {
+      for(let j = 0; j < matrix[i].length; j++) {
+        if(matrix[i][j] === matrix[i-1][j]
+          && matrix[i][j] === matrix[i-2][j]
+          && matrix[i][j] === color) {
+
+          let nextVerticalPosition = {x: i-3, y: j}
+          let verticalPositionAvailable = this.getLastEmptyPosition(j)
+
+          if(verticalPositionAvailable && verticalPositionAvailable.x === nextVerticalPosition.x && verticalPositionAvailable.y === nextVerticalPosition.y) {
+              return verticalPositionAvailable;
+          }
+        }
+      }
+    }
+  }
+
+  // comprobar si el usuario va a ganar haciendo linea diagonal-izquierda
+  checkDiagonalLeftIA(color, matrix) {
+    for(let i = 3; i < matrix.length; i++) {
+      for(let j = 0; j < matrix[i].length; j++) {
+        if(matrix[i][j] === matrix[i-1][j+1]
+          && matrix[i][j] === matrix[i-2][j+2]
+          && matrix[i][j] === color) {
+
+          let nextDiagonalLeftPosition = {x: i-3, y: j+3}
+          let diagonalLeftPositionAvailable = this.getLastEmptyPosition(j+3);
+
+          if(diagonalLeftPositionAvailable && diagonalLeftPositionAvailable.x === nextDiagonalLeftPosition.x && diagonalLeftPositionAvailable.y === nextDiagonalLeftPosition.y) {
+              return diagonalLeftPositionAvailable;
+          }
+        }
+      }
+    }
+  }
+
+  // comprobar si el usuario va a ganar haciendo linea diagonal-derecha
+  checkDiagonalRightIA(color, matrix) {
+    for(let i = 5; i > 3; i--) {
+      for(let j = 6; j > 3; j--) {
+        if(matrix[i][j] === matrix[i-1][j-1]
+         && matrix[i][j] === matrix[i-2][j-2]
+          && matrix[i][j] === color) {
+
+          let nextDiagonalRightPosition = {x: i-3, y: j-3}
+          let diagonalRightPositionAvailable = this.getLastEmptyPosition(j-3);
+
+          if(diagonalRightPositionAvailable && diagonalRightPositionAvailable.x === nextDiagonalRightPosition.x && diagonalRightPositionAvailable.y === nextDiagonalRightPosition.y) {
+              return diagonalRightPositionAvailable;
+          }
+        }
+      }
+    }
+  }
+
+  // elegir una posición random para que juege el ordenador de entre las que quedan disponibles.
+  getRandomPositionPc() {
+    let availableColumns = this.getAllEmptyPositions()
+      .map(elem => elem.y)
+      .filter(function(item, index, array) {
+        return array.indexOf(item) === index;
+      })
+
+    let randomIndex = Math.floor(Math.random() * (availableColumns.length))
+    let randomColumn = availableColumns[randomIndex]
+    let pcPosition = this.getLastEmptyPosition(randomColumn)
+    return pcPosition
+  }
+
+  // función que decide qué posición va a jugar el ordenador. Entre las posibles que tenga, que son en las que sabe que el otro jugador va a ganar, elige una de manera random.
+  artificialInteligence() {
+    let matrix = this.state.boardGame
+    let pcMovesInHorizontal = this.checkHorizontalIA('red', matrix)
+    let pcMovesInVertical = this.checkVerticalIA('red', matrix);
+    let pcMovesInDiagonalLeft = this.checkDiagonalLeftIA('red', matrix)
+    let pcMovesInDiagonalRight = this.checkDiagonalRightIA('red', matrix)
+    let pcRandomMove = this.getRandomPositionPc();
+
+    let posibleMovements = []
+
+    if(pcMovesInHorizontal) {
+      posibleMovements.push(pcMovesInHorizontal)
+    } else if(pcMovesInVertical) {
+      posibleMovements.push(pcMovesInVertical)
+    } else if(pcMovesInDiagonalLeft) {
+      posibleMovements.push(pcMovesInDiagonalLeft)
+    } else if(pcMovesInDiagonalRight) {
+      posibleMovements.push(pcMovesInDiagonalRight)
+    }
+
+    if (posibleMovements.length > 0) {
+      let randomIndex = Math.floor(Math.random() * posibleMovements.length)
+      return posibleMovements[randomIndex];
+    } else {
+      return pcRandomMove
+    }
+  }
+
+  // jugada del Pc
   playPc = () => {
     setTimeout(() => {
       if(this.state.player === 'Player 1') {
-        let availableColumns = this.getAllEmptyPositions()
-          .map(elem => elem.y)
-          .filter(function(item, index, array) {
-            return array.indexOf(item) === index;
-          })
-
-        let randomIndex = Math.floor(Math.random() * (availableColumns.length))
-        let randomColumn = availableColumns[randomIndex]
-        let pcPosition = this.getLastEmptyPosition(randomColumn)
-        //this.checkHorizontalIA('red', this.state.boardGame)
-        this.putAPiece(pcPosition);
+        let decisionPc = this.artificialInteligence()
+        console.log(decisionPc)
+        this.putAPiece(decisionPc);
         this.checkIfWinner('blue')
       }}, 500)
   }
