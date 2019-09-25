@@ -2,11 +2,12 @@ import React, { Component, Fragment } from 'react';
 import '../../App.css';
 import Board from '../Board/Board';
 import { Link } from 'react-router-dom';
+import { singlePlayer } from '../../strings';
 
 
 class SinglePlayer extends Component {
   state = {
-    boardGame: Array(6).fill().map(()=>Array(7).fill(null)),
+    boardGame: Array(6).fill().map(() => Array(7).fill(null)),
     color: 'red',
     player: 'Player 2',
     isWon: false
@@ -34,8 +35,8 @@ class SinglePlayer extends Component {
   getLastEmptyPosition(column) {
     let allEmptyPositions = this.getAllEmptyPositions();
     let lastEmptyPosition = allEmptyPositions
-                              .filter(elem => elem.y === column)
-                              .sort((a, b) => b.x - a.x)[0]
+      .filter(elem => elem.y === column)
+      .sort((a, b) => b.x - a.x)[0]
     return lastEmptyPosition;
   }
 
@@ -134,7 +135,7 @@ class SinglePlayer extends Component {
   // reinicia el state
   restart =() => {
     this.setState({
-      boardGame: Array(6).fill().map(()=>Array(7).fill(null)),
+      boardGame: Array(6).fill().map(() => Array(7).fill(null)),
       color: 'red',
       player: 'Player 2',
       isWon: false
@@ -151,9 +152,11 @@ class SinglePlayer extends Component {
           .filter(function(item, index, array) {
             return array.indexOf(item) === index;
           })
+
         let randomIndex = Math.floor(Math.random() * (availableColumns.length))
         let randomColumn = availableColumns[randomIndex]
         let pcPosition = this.getLastEmptyPosition(randomColumn)
+
         this.putAPiece(pcPosition);
         this.checkIfWinner()
       }}, 500)
@@ -190,25 +193,33 @@ class SinglePlayer extends Component {
           {!this.state.isWon
             ?
             <div className='text-turn-container'>
-              <h2>{this.state.player === 'Player 2' ? 'Player 2' : 'Player PC'}, is your turn.</h2>
+              <h2>
+                { singlePlayer.playerTurn(this.state.player) }
+              </h2>
               <div className='turn-container'>
-                <h2 className={this.state.player === 'Player 1' ? 'blue' : 'blue inactive'}>PC</h2>
-                <h2 className={this.state.player === 'Player 2' ? 'red' : 'red inactive'}>Player 2</h2>
+                <h2 className={this.state.player === 'Player 1' ? 'blue' : 'blue inactive'}>
+                  { singlePlayer.pcTurn }
+                </h2>
+                <h2 className={this.state.player === 'Player 2' ? 'red' : 'red inactive'}>
+                  { singlePlayer.secondPlayer }
+                </h2>
               </div>
             </div>
             :
             <div className='winner-container'>
-              <h2>{this.state.isWon === true ? this.state.player + ' wins!' : 'This is a draw!'}</h2>
+              <h2>
+                { singlePlayer.winOrDraw(this.state.isWon, this.state.player) }
+              </h2>
             </div>
           }
 
             <div>
               <button onClick={this.restart} className='restart-button'>
-                  Restart
+                { singlePlayer.restart}
               </button>
                 <Link to='/'>
                   <button className='end-game-button'>
-                    End game
+                    { singlePlayer.endGame }
                   </button>
                 </Link>
             </div>

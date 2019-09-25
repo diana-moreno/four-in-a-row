@@ -3,6 +3,8 @@ import '../../App.css';
 import Board from '../Board/Board';
 import { Link } from 'react-router-dom';
 
+import { twoPlayers } from '../../strings';
+
 
 class TwoPlayers extends Component {
   state = {
@@ -166,24 +168,28 @@ class TwoPlayers extends Component {
           <div className='right-container'>
           {!this.state.isWon ?
             <div className='text-turn-container'>
-              <h2>{this.state.player}, is your turn.</h2>
+              <h2>{ twoPlayers.playerTurn(this.state.player) }</h2>
               <div className='turn-container'>
-                <h2 className={this.state.player === 'Player 1' ? 'blue' : 'blue inactive'}>Player 1</h2>
-                <h2 className={this.state.player === 'Player 2' ? 'red' : 'red inactive'}>Player 2</h2>
+                <h2 className={this.state.player === 'Player 1' ? 'blue' : 'blue inactive'}>
+                  { twoPlayers.playerOne }</h2>
+                <h2 className={this.state.player === 'Player 2' ? 'red' : 'red inactive'}>
+                  { twoPlayers.playerTwo }</h2>
               </div>
             </div>
             :
             <div className='winner-container'>
-              <h2>{this.state.isWon === true ? this.state.player + ' wins!' : 'This is a draw!'}</h2>
+              <h2>
+                { twoPlayers.winOrDraw(this.state.isWon, this.state.player) }
+              </h2>
             </div>
           }
             <div>
               <button onClick={this.restart} className='restart-button'>
-                  Restart
+                  { twoPlayers.restart }
               </button>
                 <Link to='/'>
                   <button className='end-game-button'>
-                    End game
+                  { twoPlayers.endGame }
                   </button>
                 </Link>
             </div>
