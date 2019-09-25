@@ -44,7 +44,7 @@ class SinglePlayer extends Component {
     if(!this.state.isWon) {
       let lastEmptyPosition = this.getLastEmptyPosition(column)
       this.putAPiece(lastEmptyPosition)
-      this.checkIfWinner()
+      this.checkIfWinner('red')
     }
   }
 
@@ -64,8 +64,8 @@ class SinglePlayer extends Component {
   }
 
   // comprueba si algún jugador ha ganado, ya sea haciendo linea horizontal, vertical o en cualquier diagonal.
-  checkIfWinner() {
-    let color = this.state.color
+  checkIfWinner(color) {
+    //let color = this.state.color
     let horizontalMatrix = [...this.state.boardGame]
     let verticalMatrix = this.transposeMatrix(horizontalMatrix)
     this.checkIfWinHorizontal(color, horizontalMatrix)
@@ -91,7 +91,9 @@ class SinglePlayer extends Component {
           && matrix[i][j] === color) {
           this.setState({
             ...this.state,
-            isWon: true
+            isWon: true,
+            color,
+            player: color === 'red' ? 'Player 2' : 'Player Pc'
           })
         }
       }
@@ -108,7 +110,9 @@ class SinglePlayer extends Component {
           && matrix[i][j] === color) {
           this.setState({
             ...this.state,
-            isWon: true
+            isWon: true,
+            color,
+            player: color === 'red' ? 'Player 2' : 'Player Pc'
           })
         }
       }
@@ -125,7 +129,9 @@ class SinglePlayer extends Component {
           && matrix[i][j] === color) {
           this.setState({
             ...this.state,
-            isWon: true
+            isWon: true,
+            color,
+            player: color === 'red' ? 'Player 2' : 'Player Pc'
           })
         }
       }
@@ -139,6 +145,26 @@ class SinglePlayer extends Component {
       player: 'Player 2',
       isWon: false
     })
+  }
+
+
+  // comprobar si hay linea en horizontal
+  checkHorizontalIA(color, matrix) {
+    for(let i = 0; i < matrix.length; i++) {
+      for(let j = 0; j < matrix[i].length; j++) {
+        if(matrix[i][j] === matrix[i][j+1]
+          && matrix[i][j] === matrix[i][j+2]
+          && matrix[i][j] === color) {
+          let horinzontalPosition = {x: i, y: j+3}
+
+        let availableColumns = this.getLastEmptyPosition(j+3)
+        console.log(availableColumns.x === horinzontalPosition.x && availableColumns.y === horinzontalPosition.y)
+        console.log(availableColumns)
+        console.log(horinzontalPosition)
+          console.log('a punto de ganar')
+        }
+      }
+    }
   }
 
   //Éstas dos funciones son las únicas diferentes respecto a Twoplayers.js:
@@ -155,9 +181,9 @@ class SinglePlayer extends Component {
         let randomIndex = Math.floor(Math.random() * (availableColumns.length))
         let randomColumn = availableColumns[randomIndex]
         let pcPosition = this.getLastEmptyPosition(randomColumn)
-
+        //this.checkHorizontalIA('red', this.state.boardGame)
         this.putAPiece(pcPosition);
-        this.checkIfWinner()
+        this.checkIfWinner('blue')
       }}, 500)
   }
 
