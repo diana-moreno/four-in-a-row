@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import './Board.css';
 import Piece from '../Piece/Piece';
-import { string, func } from 'prop-types';
+import { string, func, number } from 'prop-types';
 
 const Board = ({ playGame, Y, X, color }) => {
 
@@ -20,9 +20,9 @@ const Board = ({ playGame, Y, X, color }) => {
 }
 
 Board.propTypes = {
-  X: string.isRequired,
-  Y: string.isRequired,
-  color: string.isRequired,
+  X: number.isRequired,
+  Y: number.isRequired,
+  color: string,
   playGame: func.isRequired,
 }
 
