@@ -65,7 +65,6 @@ class SinglePlayer extends Component {
 
   // comprueba si algún jugador ha ganado, ya sea haciendo linea horizontal, vertical o en cualquier diagonal.
   checkIfWinner(color) {
-    //let color = this.state.color
     let horizontalMatrix = [...this.state.boardGame]
     let verticalMatrix = this.transposeMatrix(horizontalMatrix)
     this.checkIfWinHorizontal(color, horizontalMatrix)
