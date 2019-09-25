@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 class SinglePlayer extends Component {
   state = {
-    boardGame: Array(6).fill().map(()=>Array(7).fill(null)),
+    boardGame: Array(6).fill().map(() => Array(7).fill(null)),
     color: 'red',
     player: 'Player 2',
     isWon: false
@@ -34,8 +34,8 @@ class SinglePlayer extends Component {
   getLastEmptyPosition(column) {
     let allEmptyPositions = this.getAllEmptyPositions();
     let lastEmptyPosition = allEmptyPositions
-                              .filter(elem => elem.y === column)
-                              .sort((a, b) => b.x - a.x)[0]
+      .filter(elem => elem.y === column)
+      .sort((a, b) => b.x - a.x)[0]
     return lastEmptyPosition;
   }
 
@@ -134,7 +134,7 @@ class SinglePlayer extends Component {
   // reinicia el state
   restart =() => {
     this.setState({
-      boardGame: Array(6).fill().map(()=>Array(7).fill(null)),
+      boardGame: Array(6).fill().map(() => Array(7).fill(null)),
       color: 'red',
       player: 'Player 2',
       isWon: false
@@ -151,9 +151,11 @@ class SinglePlayer extends Component {
           .filter(function(item, index, array) {
             return array.indexOf(item) === index;
           })
+
         let randomIndex = Math.floor(Math.random() * (availableColumns.length))
         let randomColumn = availableColumns[randomIndex]
         let pcPosition = this.getLastEmptyPosition(randomColumn)
+
         this.putAPiece(pcPosition);
         this.checkIfWinner()
       }}, 500)

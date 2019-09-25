@@ -35,8 +35,8 @@ class TwoPlayers extends Component {
   getLastEmptyPosition(column) {
     let allEmptyPositions = this.getAllEmptyPositions();
     let lastEmptyPosition = allEmptyPositions
-                              .filter(elem => elem.y === column)
-                              .sort((a, b) => b.x - a.x)[0]
+      .filter(elem => elem.y === column)
+      .sort((a, b) => b.x - a.x)[0]
     return lastEmptyPosition;
   }
 
