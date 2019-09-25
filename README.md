@@ -28,6 +28,7 @@ Four in a Row is an online version of the classic two-player connection game. Ev
 ### **Resources**
 
 - Icons from [Font Awesome](https://fontawesome.com/icons?d=gallery).
+- Background designed by "rawpixel.com" from [Freepik](https://www.freepik.es), free with atribution.
 - This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), from Facebook.
 - Router from an Npm package [Npm React Router](https://www.npmjs.com/package/react-router-dom).
 - Prop-types from [Npm Prop-types](https://www.npmjs.com/package/prop-types).

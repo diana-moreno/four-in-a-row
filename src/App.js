@@ -18,6 +18,7 @@ const App = () => (
         <Route component={() => (<div>404 Not found</div>)} />
       </Switch>
     </Router>
+    <a id='atribution' href="http://www.freepik.com">Designed by Freepik</a>
   </Fragment>
 )
 

@@ -87,6 +87,13 @@ a {
   cursor: pointer;
   border: 3px solid #d6a8de;
 }
+#atribution {
+  color: grey;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0 1rem 1rem 0;
+}
 
 
 /* big landscape tablets, laptops, and desktops */
