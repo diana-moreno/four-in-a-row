@@ -1,17 +1,14 @@
-html {
-  font-size: calc(5px + 4 * ((100vw - 480px) / 801));
-}
 body {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   background-color: #d9e8ef;
+  flex-direction: column;
 }
 html, body {
   width: 100%;
   height: 100%;
   margin: 0;
-  sssbackground: #fcfcfc;
 }
 h1 {
   margin: 0;
@@ -40,6 +37,13 @@ main {
   justify-content: center;
   align-items: center;
 }
+p {
+  font-size: 10rem;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
 .left-container, .right-container {
   width: 100%;
   text-align: center;
@@ -67,10 +71,10 @@ main {
 }
 .turn-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .end-game-button, .restart-button {
-  font-size: 2rem;
+  font-size: 3rem;
   color: white;
   background-color: #6f91a1;
   padding: 1rem;
@@ -79,19 +83,7 @@ main {
   margin: 1rem;
   cursor: pointer;
 }
-a {
-  color: white;
-  text-decoration: none;
-}
 
-
-/* smartphones, Android phones, landscape iPhone */
-@media screen and (min-device-width:480px) {}
-/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
-@media (min-width:600px) {}
-@media screen and (min-width:640px) {}
-/* tablet, landscape iPad, lo-res laptops ands desktops */
-@media (min-width:801px) {}
 
 /* big landscape tablets, laptops, and desktops */
 @media (min-width:1025px) {
@@ -109,6 +101,7 @@ a {
   }
   .left-container {
     width: 70%;
+    margin: 0 2rem;
   }
   .right-container {
     width: 30%;
@@ -119,11 +112,7 @@ a {
   .text-turn-container > h2 {
     font-size: 2.5rem;
   }
-}
-
-/* hi-res laptops and desktops */
-@media screen and (min-width:1281px) {
-  html {
-    font-size: 12px;
+  .end-game-button, .restart-button {
+    font-size: 2rem;
   }
 }

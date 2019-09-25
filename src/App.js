@@ -10,11 +10,12 @@ function App() {
       <header>
         <h1>Four in a row</h1>
       </header>
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route exact path='/' component={Rules} />
           <Route exact path='/twoPlayers' component={TwoPlayers} />
           <Route exact path='/singlePlayer' component={SinglePlayer} />
+          <Route component={() => (<div>404 Not found </div>)} />
         </Switch>
       </Router>
     </Fragment>
