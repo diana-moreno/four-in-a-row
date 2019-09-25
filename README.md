@@ -19,6 +19,7 @@ Four in a Row is an online version of the classic two-player connection game. Ev
 - Develop logic with multidimensional array.
 - Utilize props and state properly in a React project.
 - Create Routes with React Router.
+
 - Create HTML elements dynamically linking to a specific classes.
 - Solve common React errors like "use unique keys when render an element" or "use ES6 syntax".
 - Deploy the project to production in Github pages configuring the routes.
@@ -30,7 +31,7 @@ Four in a Row is an online version of the classic two-player connection game. Ev
 
 ### **Usage**
 
-- You can run the final project deployed here: https://diana-moreno.github.io/four-in-a-row/
+You can run the final project deployed here: https://diana-moreno.github.io/four-in-a-row/
 
 To run the game in local:
 
