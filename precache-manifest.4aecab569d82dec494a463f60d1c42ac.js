@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2fe5aac5ede8da269b97b38d1aea57cd",
+    "revision": "ed6b4a002acd9d3e89669805dab598af",
     "url": "/four-in-a-row/index.html"
   },
   {
-    "revision": "aea096ee286bd0dcb11d",
+    "revision": "f6cf6a6720e6b9ebfed1",
     "url": "/four-in-a-row/static/css/main.e7023cce.chunk.css"
   },
   {
-    "revision": "72bd03c7873e4da82e56",
-    "url": "/four-in-a-row/static/js/2.4cca9563.chunk.js"
+    "revision": "23acfe531657418020e0",
+    "url": "/four-in-a-row/static/js/2.c4b70f49.chunk.js"
   },
   {
-    "revision": "aea096ee286bd0dcb11d",
-    "url": "/four-in-a-row/static/js/main.e4da4a94.chunk.js"
+    "revision": "f6cf6a6720e6b9ebfed1",
+    "url": "/four-in-a-row/static/js/main.ec2f81d6.chunk.js"
   },
   {
     "revision": "5c3fb80f87d866cd7eb2",
