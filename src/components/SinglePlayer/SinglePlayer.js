@@ -278,7 +278,6 @@ class SinglePlayer extends Component {
     setTimeout(() => {
       if(this.state.player === 'Player 1') {
         let decisionPc = this.artificialInteligence()
-        console.log(decisionPc)
         this.putAPiece(decisionPc);
         this.checkIfWinner('blue')
       }}, 500)

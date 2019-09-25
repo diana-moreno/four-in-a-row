@@ -59,8 +59,10 @@ a {
   flex-direction: column;
 }
 .boardGame-container {
-  height: 60rem;
-  width: 70rem;
+  sssheight: 60rem;
+  ssswidth: 70rem;
+  height: 53rem;
+  width: 62rem;
   background: rgba(69, 71, 100, 0.5);
   border: 4px solid grey;
 }
