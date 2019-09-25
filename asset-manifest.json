@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/four-in-a-row/static/css/main.e7023cce.chunk.css",
+    "main.css": "/four-in-a-row/static/css/main.339c6401.chunk.css",
     "main.js": "/four-in-a-row/static/js/main.ec2f81d6.chunk.js",
     "main.js.map": "/four-in-a-row/static/js/main.ec2f81d6.chunk.js.map",
     "runtime-main.js": "/four-in-a-row/static/js/runtime-main.19ec890b.js",
@@ -8,9 +8,9 @@
     "static/js/2.c4b70f49.chunk.js": "/four-in-a-row/static/js/2.c4b70f49.chunk.js",
     "static/js/2.c4b70f49.chunk.js.map": "/four-in-a-row/static/js/2.c4b70f49.chunk.js.map",
     "index.html": "/four-in-a-row/index.html",
-    "precache-manifest.4aecab569d82dec494a463f60d1c42ac.js": "/four-in-a-row/precache-manifest.4aecab569d82dec494a463f60d1c42ac.js",
+    "precache-manifest.3938efdf0661236d7609cabed4d00f13.js": "/four-in-a-row/precache-manifest.3938efdf0661236d7609cabed4d00f13.js",
     "service-worker.js": "/four-in-a-row/service-worker.js",
-    "static/css/main.e7023cce.chunk.css.map": "/four-in-a-row/static/css/main.e7023cce.chunk.css.map",
+    "static/css/main.339c6401.chunk.css.map": "/four-in-a-row/static/css/main.339c6401.chunk.css.map",
     "static/media/rules.gif": "/four-in-a-row/static/media/rules.d53af3ef.gif"
   }
 }
