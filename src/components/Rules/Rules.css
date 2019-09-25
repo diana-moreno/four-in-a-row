@@ -1,5 +1,5 @@
 html {
-  font-size: 7px;
+  font-size: 4px;
 }
 .instructions-container {
   text-align: center;
@@ -22,7 +22,7 @@ html {
 .players-icons-container > a {
   margin: 2rem;
   color: grey;
-  font-size: 3rem;
+  font-size: 4rem;
 }
 .players-icons-container > a:hover {
   margin: 1.5rem;
@@ -37,6 +37,9 @@ html {
 
 /* smartphones, Android phones, landscape iPhone */
 @media screen and (min-device-width:480px) {
+  html {
+    font-size: 5px;
+  }
   .instructions-container > p {
     font-size: 2.8rem;
   }
@@ -46,6 +49,9 @@ html {
 }
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
 @media (min-width:600px) {
+    html {
+    font-size: 7px;
+  }
   .instructions-container > p {
     font-size: 2.8rem;
   }
