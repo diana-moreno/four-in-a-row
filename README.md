@@ -19,16 +19,19 @@ Four in a Row is an online version of the classic two-player connection game. Ev
 - Develop logic with multidimensional array.
 - Utilize props and state properly in a React project.
 - Create Routes with React Router.
-
 - Create HTML elements dynamically linking to a specific classes.
 - Solve common React errors like "use unique keys when render an element" or "use ES6 syntax".
 - Deploy the project to production in Github pages configuring the routes.
+- Add proptypes support to enforce some props.
+- Add eslint support to help keeping the code clean.
 
 ### **Resources**
 
 - Icons from [Font Awesome](https://fontawesome.com/icons?d=gallery).
 - This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), from Facebook.
 - Router from an Npm package [Npm React Router](https://www.npmjs.com/package/react-router-dom).
+- Prop-types from [Npm Prop-types](https://www.npmjs.com/package/prop-types).
+- Eslint from [Npm Eslint](https://www.npmjs.com/package/eslint-plugin-react).
 
 ### **Usage**
 
