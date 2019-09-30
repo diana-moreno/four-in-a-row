@@ -25,6 +25,21 @@ Four in a Row is an online version of the classic two-player connection game. Ev
 - Add proptypes support to enforce some props.
 - Add eslint support to help keeping the code clean.
 
+### **Functional description**
+
+Flux diagram:
+
+![flow-diagram](./src/img/flux-diagram.jpg)
+
+### **Technical description**
+
+This project was made with React and React Router.
+Components diagram:
+
+![components-diagram](./src/img/components-diagram.jpg)
+
+
+
 ### **Resources**
 
 - Icons from [Font Awesome](https://fontawesome.com/icons?d=gallery).
